@@ -1,271 +1,47 @@
 ---
 title: "Design and Calibration of a 3D-Printed Cup-Vane Wireless Sensor Node"
-description: "Development of cost-effective wireless environmental sensing systems for IoT applications"
+description: "A 3D-printed cup anemometer and wind vane that measures wind within plus or minus 0.063398 m/s and sends its data wirelessly over IEEE 802.15.4, as a low-cost instrument for wind site assessment."
 contributors: "sam-macharia,christian-gradl,jean-byiringiro,harrison-ngetha"
-tags: ["wireless-sensors", "3d-printing", "environmental-monitoring", "IoT", "wind-energy"]
-excerpt: "This research presents the design and calibration of a 3D-printed cup-vane wireless sensor node for comprehensive environmental monitoring, demonstrating innovative approaches to cost-effective IoT sensor development."
 pubDate: 2025-08-28
+tags: ["wireless-sensors", "3d-printing", "wind-energy", "anemometer", "iot", "calibration"]
+excerpt: "A calibrated 3D-printed cup-vane instrument that acts as a wireless sensor node, built for small-scale wind farmers who cannot afford commercial instruments."
 citation:
   journal: "Designs"
   year: 2018
+  volume: 2
+  issue: 3
   doi: "10.3390/designs2030021"
+  authors: ["Samuel Kang'iri", "Christian Gradl", "Jean Byiringiro", "Harrison Ngetha"]
 ---
 
-import IoTAIoTComments from '../../../../components/iot-and-aiot/IoTAIoTComments.astro';
-import TawkWidget from '../../../../components/TawkWidget.astro';
-import UniversalContentContributors from '../../../../components/UniversalContentContributors.astro';
-import InArticleAd from '../../../../components/InArticleAd.astro';
-import Copyright from '../../../../components/Copyright.astro';
-import BionicText from '../../../../components/BionicText.astro';
-import TailwindWrapper from '../../../../components/TailwindWrapper.jsx';
-import { Tabs, TabItem } from '@astrojs/starlight/components';
-import { Card, CardGrid, Badge, Steps, LinkButton, FileTree } from '@astrojs/starlight/components';
+Before a wind turbine is installed, someone has to measure the wind at the site for at least a year. That has created a steady demand for cup anemometers and wind vanes. Many commercial instruments are on sale, but some lack proper calibration, and many are too expensive for small-scale wind farmers, especially in developing countries.
 
-<UniversalContentContributors 
-  contributors={frontmatter.contributors}
-/>
+Wind data is also a large-data problem. A year of readings from several masts is a long, continuous record, and most commercial instruments are not built to handle it that way.
 
+## What we did
 
+We designed a cup-vane instrument for collecting wind data and made its parts by 3D printing. The instrument works as a wireless sensor node in an Internet of Things (IoT) network. It acquires wind data, stores it, and sends it wirelessly to a sink node using the IEEE 802.15.4 protocol.
 
-## Research Objectives
+We then calibrated the instrument. In the laboratory we tested it in an Armfield wind tunnel at wind speeds from 1 to 16 m/s. Outside, we tested it in an open field at wind speeds from 1 to 5 m/s.
 
-This study focuses on developing an affordable, accurate wireless sensor node capable of collecting comprehensive environmental data for IoT applications, with particular emphasis on wind resource assessment for renewable energy systems.
+## What we found
 
-<BionicText method="advanced" intensity="medium" class="highlight">
-The research demonstrates how 3D printing technology can be leveraged to create cost-effective wireless sensor nodes that maintain professional-grade accuracy while enabling widespread deployment for environmental monitoring applications.
-</BionicText>
+- The instrument acquired wind data within a mean fitting deviation of plus or minus 0.063398 m/s.
+- It stored the data and presented it wirelessly to an IEEE 802.15.4 sink node.
+- Its performance was verified in the wind tunnel across 1 to 16 m/s and in the open field across 1 to 5 m/s.
 
-## Publication Details
+## Why it matters
 
-<InArticleAd />
+For a small-scale wind farmer, the first cost of a wind project is the year of measurement. An instrument that can be 3D-printed, calibrated against a wind tunnel and read over a wireless link is meant to lower that cost. Because each instrument is a node in a wireless network, several masts can report to one sink, which suits the large, continuous data sets that wind assessment needs.
 
+This instrument later became the field node of a complete wind resource assessment system, which also analyses the data and reports wind distributions and power predictions.
 
-<Card title="Publication Information">
+## Limits
 
-**Journal**: Designs  
-**Year**: 2018  
-**DOI**: [10.3390/designs2030021](https://doi.org/10.3390/designs2030021)  
-**Publisher**: MDPI  
-**Type**: Original Research Article
+This summary is written from the published abstract. The outdoor test covered only low wind speeds, 1 to 5 m/s; higher speeds were tested in the wind tunnel. The abstract does not report a long field record, the durability of the printed parts outdoors, or a cost comparison with commercial instruments.
 
-</Card>
+## Read the paper
 
-## Research Summary
-
-<InArticleAd />
-
-
-<Tabs>
-  <TabItem label="Key Innovation">
-    ### 3D-Printed Sensor Design
-    
-    **Hardware Components**:
-    - Custom 3D-printed cup-vane anemometer design
-    - Atmega328P-AU microcontroller for data processing
-    - XBee radio module for IEEE 802.15.4 wireless communication
-    - Multi-sensor integration for comprehensive environmental monitoring
-    
-    **Measurement Capabilities**:
-    - Wind speed and direction
-    - Air temperature and humidity
-    - Atmospheric pressure
-    - Altitude measurements
-    
-    **Performance Achievements**:
-    - Mean fitting deviation of ±0.063398 m/s for wind speed
-    - Wireless transmission range up to 100 meters
-    - Cost-effective alternative to commercial instruments
-    
-    ### IoT Integration Benefits
-    
-    This approach enables massive wind data collection for renewable energy research while maintaining affordability for small-scale deployments.
-  </TabItem>
-
-  <TabItem label="Methodology">
-    ### Design and Development Process
-    
-    **3D Printing Approach**:
-    - Computer-aided design of cup-vane structure
-    - Material selection for outdoor environmental conditions
-    - Iterative design optimization for aerodynamic performance
-    - Integration with electronic components
-    
-    **Calibration Process**:
-    - Laboratory testing against reference standards
-    - Field validation under various environmental conditions
-    - Statistical analysis of measurement accuracy
-    - Performance verification across operational ranges
-    
-    **Wireless Communication**:
-    - IEEE 802.15.4 protocol implementation
-    - Network topology optimization for sensor deployment
-    - Data transmission reliability testing
-    - Power consumption optimization
-    
-    **System Integration**:
-    - Multi-parameter sensor fusion
-    - Real-time data processing algorithms
-    - Wireless network coordination
-    - Central station data aggregation
-  </TabItem>
-
-  <TabItem label="Applications">
-    ### Practical Implementations
-    
-    **Renewable Energy**:
-    - Wind resource assessment for small-scale wind farms
-    - Site evaluation for wind turbine placement
-    - Performance monitoring of existing installations
-    - Economic feasibility studies
-    
-    **Environmental Monitoring**:
-    - Weather station networks
-    - Agricultural microclimate monitoring
-    - Urban environmental sensing
-    - Research data collection
-    
-    **IoT System Development**:
-    - Low-cost sensor network deployment
-    - Distributed environmental monitoring
-    - Smart city infrastructure
-    - Research and educational applications
-    
-    **Future Scalability**:
-    - Mass production potential through 3D printing
-    - Customization for specific applications
-    - Integration with larger IoT ecosystems
-    - Open-source hardware development
-  </TabItem>
-</Tabs>
-
-## Research Impact
-
-<InArticleAd />
-
-
-<CardGrid>
-  <Card title="Cost Effectiveness">
-    **Economic Innovation**
-    
-    - Significant cost reduction compared to commercial alternatives
-    - 3D printing enables local manufacturing
-    - Reduced deployment barriers for small-scale applications
-    - Democratization of environmental monitoring technology
-  </Card>
-  
-  <Card title="Technical Achievement">
-    **Engineering Excellence**
-    
-    - Professional-grade measurement accuracy
-    - Robust wireless communication implementation
-    - Multi-parameter sensing integration
-    - Validated performance under field conditions
-  </Card>
-  
-  <Card title="IoT Advancement">
-    **Technology Integration**
-    
-    - Practical demonstration of IoT sensor networks
-    - Scalable wireless communication architecture
-    - Edge computing for sensor data processing
-    - Foundation for larger IoT deployments
-  </Card>
-  
-  <Card title="Environmental Impact">
-    **Sustainability Focus**
-    
-    - Support for renewable energy development
-    - Enabling data-driven environmental decisions
-    - Reduced electronic waste through local manufacturing
-    - Educational tool for sustainability awareness
-  </Card>
-</CardGrid>
-
-## Detailed Analysis
-
-<InArticleAd />
-
-
-### Hardware Design Innovation
-
-The research presents a comprehensive approach to sensor node development:
-
-- **Mechanical Design**: 3D-printed cup-vane structure optimized for aerodynamic performance
-- **Electronic Integration**: Seamless integration of multiple sensors with wireless communication
-- **Power Management**: Efficient power consumption for extended field deployment
-- **Environmental Durability**: Design considerations for outdoor operation
-
-### Calibration and Validation
-
-<Steps>
-
-1. **Laboratory Calibration**
-   
-   Controlled environment testing against certified reference instruments to establish baseline accuracy.
-
-2. **Field Validation**
-   
-   Real-world testing under various environmental conditions to verify operational performance.
-
-3. **Statistical Analysis**
-   
-   Comprehensive statistical evaluation achieving ±0.063398 m/s mean fitting deviation.
-
-4. **Long-term Reliability**
-   
-   Extended operation testing to evaluate sensor stability and measurement consistency.
-
-</Steps>
-
-### IoT System Architecture
-
-The wireless sensor implementation demonstrates key IoT principles:
-
-- **Distributed Sensing**: Multiple nodes creating a comprehensive monitoring network
-- **Wireless Communication**: IEEE 802.15.4 protocol enabling reliable data transmission
-- **Central Coordination**: Data aggregation and processing at a central station
-- **Scalable Design**: Architecture supporting network expansion and additional sensor types
-
-## Technological Innovations
-
-<InArticleAd />
-
-
-This research contributes several key innovations to IoT sensor development:
-
-### 3D Printing Integration
-- Cost-effective manufacturing approach
-
-- Rapid prototyping and design iteration
-- Customization potential for specific applications
-- Local production capabilities
-
-### Multi-Parameter Sensing
-- Comprehensive environmental data collection
-- Sensor fusion for enhanced accuracy
-- Correlated measurement capabilities
-- Rich dataset generation for analysis
-
-### Wireless Network Design
-- Optimized communication protocols
-- Network topology considerations
-- Range and reliability optimization
-- Power-efficient transmission
-
-## Further Reading
-
-<InArticleAd />
-
-
-For comprehensive details on sensor design, calibration procedures, and IoT implementation:
-
-**Access the Full Paper**: [Designs - 3D-Printed Cup-Vane Wireless Sensor Node](https://doi.org/10.3390/designs2030021)
-
-This research provides practical insights for developing cost-effective IoT sensor systems and demonstrates the potential of 3D printing technology in environmental monitoring applications.
-
-
-
-<InArticleAd />
-<IoTAIoTComments />
-<TawkWidget />
-<Copyright />
+- Journal article: [doi.org/10.3390/designs2030021](https://doi.org/10.3390/designs2030021), Designs, volume 2, issue 3, 2018. [Read it at the journal](https://www.mdpi.com/2411-9660/2/3/21).
+- Related thesis: [Design and Implementation of an Advanced System for Wind Resource Assessment](/research/iot-and-aiot/wind-resource-assessment-system/).
+- Authors: Samuel Kang'iri, Christian Gradl, Jean Byiringiro, Harrison Ngetha.

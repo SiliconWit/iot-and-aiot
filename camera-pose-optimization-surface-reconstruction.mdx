@@ -1,0 +1,46 @@
+---
+title: "Bi-Objective Genetic Optimization of Camera Poses for Targeted Surface Reconstruction"
+description: "Choosing camera positions for the parts of an object that matter gives a better 3D model from fewer photos: 22 optimized viewpoints beat 71 evenly spaced ones on accuracy and point density."
+contributors: "andrew-kibor,sam-macharia"
+pubDate: 2026-11-25
+tags: ["photogrammetry", "3d-reconstruction", "structure-from-motion", "genetic-algorithms", "multi-objective-optimization"]
+excerpt: "Place cameras for each region of interest, trading feature matching against triangulation uncertainty, and a crashed car model is rebuilt more accurately from 22 views than from 71."
+citation:
+  journal: "Journal of Applied Science, Engineering and Technology for Development"
+  year: 2026
+  volume: 6
+  issue: 1
+  doi: "10.33803/69b7sy.2"
+  authors: ["Andrew Kibor Chesang", "Samuel Macharia Kang'iri"]
+---
+
+An investigator at a crash scene, a surveyor measuring a stockpile and an archaeologist recording a dig all need an accurate 3D model built from photographs. The usual practice is to walk around the object and take many evenly spaced photos. That costs time on site and processing time afterwards, and it still treats every part of the object as equally important. The dent in a car door gets no more attention than the roof.
+
+There are two established ways to plan the photos. One designs the whole camera network in advance from a rough model of the object. The other picks the next best view one shot at a time while the capture is in progress. Both still judge the result over the whole object, which becomes slow and wasteful for complex shapes.
+
+## What we did
+
+We combined the two approaches and focused them on the parts that matter. From a depth map of the object we marked regions of interest. For each region we searched for camera positions with NSGA-II, a genetic algorithm that handles two goals at once. The first goal was high consistency of feature matches between views. The second was low triangulation uncertainty, measured with the A-optimality criterion, which looks at the spread of the estimated 3D point positions. The search respected photogrammetric and geometric constraints.
+
+The search returns a set of best trade-offs between the two goals. We picked three of them with pseudo-weighting, a way of choosing a point on that set by how much each goal is favoured. We then ran each choice through a complete photogrammetric reconstruction of a rendered crashed car model and compared it with a baseline of uniformly sampled views.
+
+## What we found
+
+- All three optimized camera sets gave better reconstruction accuracy than the uniform baseline.
+- All three also gave denser point clouds.
+- They did this with 22 viewpoints, against 71 for the baseline.
+- Planning views per region, with uncertainty modelled in advance, gave more information per photo than taking many photos evenly.
+
+## Why it matters
+
+Fewer photos mean less time on a road, a site or a dig, and less computing time to build the model. Because the plan targets the regions the user cares about, the effort goes where the detail is needed. The abstract names forensic documentation, stockpile estimation and archaeological recording as uses.
+
+## Limits
+
+This summary is written from the published abstract. The test used one rendered model of a crashed car, not photographs of a real scene, so lighting, surface texture and camera errors in the field were not part of the test. The abstract does not give the size of the accuracy gain in numbers, and it does not report how long the optimization takes.
+
+## Read the paper
+
+- Journal article: [doi.org/10.33803/69b7sy.2](https://doi.org/10.33803/69b7sy.2), Journal of Applied Science, Engineering and Technology for Development, volume 6, issue 1, 2026. [Download the PDF](https://jasetd.dkut.ac.ke/2026/69b7sy/69b7sy.pdf) from the journal, free to read.
+- Conference proceeding manuscript: [doi.org/10.33803/69b7sy](https://doi.org/10.33803/69b7sy), 10th DeKUT International Conference on Science, Technology, Innovation and Entrepreneurship, 2026.
+- Authors: Andrew Kibor Chesang, Samuel Macharia Kang'iri.

@@ -1,0 +1,44 @@
+---
+title: "ST-RAG: Spatio-Temporal Retrieval-Augmented Generation for Behaviour-Grounded Virtual Agents in Immersive Clinical Training"
+description: "A virtual patient that answers based on where the trainee stands and what they look at, not only on what they say. It runs on one PC at 1.26 to 1.43 s per turn and returned the right knowledge in all 480 matched tests."
+contributors: "sam-macharia,jean-byiringiro"
+pubDate: 2026-11-25
+tags: ["virtual-reality", "clinical-simulation", "retrieval-augmented-generation", "virtual-patient", "local-language-models"]
+excerpt: "ST-RAG uses the trainee's distance to the patient and the body region they look at to choose what the language model knows when it replies."
+citation:
+  journal: "Book of Abstracts of the 10th DeKUT International Conference on Science, Technology, Innovation and Entrepreneurship (STI&E 2026)"
+  year: 2026
+  doi: "10.33803/y9qsvb"
+  authors: ["Edwin Ngari", "Samuel Macharia Kang'iri", "Jean B. Byiringiro"]
+---
+
+A medical trainee in a virtual reality ward walks up to a patient and leans in to look at a wound. Another trainee asks the same question from across the room. In most clinical training systems, the virtual patient gives both of them the same answer, because it responds only to the words spoken. A real patient would not.
+
+Retrieval-augmented generation (RAG) lets a training scenario be written as a set of documents instead of a branching script. A language model answers from the document that the retrieval step selects. But that selection uses only what the trainee said. Some systems give a language model the user's position or gaze, but none of them is a virtual patient.
+
+## What we did
+
+We built ST-RAG. It sorts the trainee's distance from the patient into proxemic zones, the bands of personal space that people keep around one another. It casts a ray from the direction of the trainee's head and detects when the gaze rests on a body region. It then uses that state to choose which knowledge chunk the language model receives.
+
+Everything runs on one PC: local speech recognition, an 8-billion-parameter language model and local speech synthesis. The headset target is the Meta Quest 3, which has no eye tracker, so the system uses head direction instead.
+
+We report 30 turns spoken by the first author in the Unity Editor, and 1,150 turns from a scripted trainee that drove the same server on a laptop with an RTX 4060 GPU.
+
+## What we found
+
+- The median server time per turn was 1.26 to 1.43 s across four test conditions.
+- The anchored knowledge chunk was returned only in the state it was designed for. This agreed with the coded rule in all 480 matched-pair trials.
+- Placing the whole document library in the prompt instead raised the prompt from 350 to 3,519 tokens as the library grew from 8 to 128 documents. Yet the time per turn stayed near 1.1 s, because the model reused its cached prompt. At these library sizes, retrieval gave no speed advantage.
+
+## Why it matters
+
+In a real ward, what a patient shows and says depends on how the trainee approaches. ST-RAG gives scenario authors a way to tie what the patient reveals to what the trainee does, while writing the scenario as plain documents. Because it runs locally on one PC, it needs no cloud service.
+
+## Limits
+
+This summary is written from the conference abstract. No human trainee wore a headset in any session; the tests used one author in the editor and a scripted trainee. We did not measure whether the replies are clinically appropriate. Head direction stands in for eye gaze, since the target headset has no eye tracker. The latency results hold for the library sizes tested, up to 128 documents.
+
+## Read the paper
+
+- Conference proceeding manuscript: [doi.org/10.33803/y9qsvb](https://doi.org/10.33803/y9qsvb), 10th DeKUT International Conference on Science, Technology, Innovation and Entrepreneurship, 2026.
+- Authors: Edwin Ngari, Samuel Macharia Kang'iri, Jean B. Byiringiro.

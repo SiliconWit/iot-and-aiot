@@ -1,0 +1,43 @@
+---
+title: "Vibration Fault Diagnostics in Motors"
+description: "An offline vibration classifier on a low-cost STM32F411 that tells a healthy motor from one with shaft misalignment or loose mounting, with no cloud link. Results will be reported at the poster session."
+contributors: "sam-macharia"
+pubDate: 2026-11-25
+tags: ["condition-monitoring", "vibration", "edge-ai", "stm32", "predictive-maintenance", "induction-motors"]
+excerpt: "A small 1-D neural network of about 1.6k parameters reads the vibration spectrum of a motor on the microcontroller itself and sorts it into healthy, misaligned or loose."
+citation:
+  journal: "Book of Abstracts of the 10th DeKUT International Conference on Science, Technology, Innovation and Entrepreneurship (STI&E 2026)"
+  year: 2026
+  doi: "10.33803/ea8udx"
+  authors: ["Thoithi Joan Mumbi", "Kennedy Karuri", "Dennis Kipruto", "Abdulrhaman Hassan", "Eric Mumo", "Samuel Macharia Kang'iri"]
+---
+
+Electric motors drive the pumps and fans that a plant cannot run without. Before a motor fails, its vibration changes. A technician on a round can miss a fault that develops between visits. Cloud monitoring catches more, but it adds delay, data costs and a dependence on the network. When the link drops, so does the warning.
+
+## What we did
+
+We are building a fault classifier that runs on a low-cost STM32 microcontroller, with no cloud in the loop.
+
+The test rig uses a Baldor Reliance three-phase induction motor: 0.33 HP, 400 V, 50 Hz, four poles, 1425 rpm rated, run at rated speed. We compare a healthy baseline with two induced faults: shaft misalignment and structural looseness.
+
+A triaxial ADXL345 accelerometer is rigidly mounted on the motor casing. An STM32F411CEU6 on a custom KiCad PCB shield samples it at 3200 Hz over SPI. For each window of 2048 samples, the firmware removes the DC offset, applies a Hann window and computes the FFT magnitude spectrum with CMSIS-DSP. It keeps 256 frequency bins per axis, up to 400 Hz.
+
+The spectrum is log-scaled, normalised per window and passed to a compact 1-D convolutional network. The network has three convolutional layers of 8, 16 and 16 filters, global average pooling and a three-class output, about 1.6k parameters in all. It will be trained offline in Keras, with whole recording sessions held out for testing, then quantised to INT8 and deployed with ST X-CUBE-AI.
+
+## What we found
+
+- Data collection and model development are in progress. No classification results are available yet.
+- Accuracy for the healthy, misalignment and looseness conditions, together with the model's memory footprint and inference time on the STM32F411, will be reported at the poster session.
+
+## Why it matters
+
+A plant operator who can put a small, cheap board on each motor gets warnings on site, in real time, without paying for a data link or waiting for a cloud reply. The test design holds out whole recording sessions, which is a stricter check than mixing windows from the same recording into training and test data.
+
+## Limits
+
+This summary is written from the conference abstract. No results exist yet. The rig covers one motor, one speed and two fault types, so bearing faults, other speeds and other motor sizes are outside this study. Performance on a working plant, with its background vibration, has not been tested.
+
+## Read the paper
+
+- Conference poster: [doi.org/10.33803/ea8udx](https://doi.org/10.33803/ea8udx), Book of Abstracts of the 10th DeKUT International Conference on Science, Technology, Innovation and Entrepreneurship (STI&E 2026), 2026.
+- Authors: Thoithi Joan Mumbi, Kennedy Karuri, Dennis Kipruto, Abdulrhaman Hassan, Eric Mumo, Samuel Macharia Kang'iri.

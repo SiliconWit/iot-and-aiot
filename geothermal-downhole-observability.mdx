@@ -1,0 +1,44 @@
+---
+title: "Observability Limits of Downhole State Estimation from Surface Measurements in Geothermal Drilling"
+description: "Surface signals reveal bit wear friction at 58% of stick-slip operating points but only 4% of smooth ones. Whether a downhole quantity can be estimated from the surface depends on how the drill is running."
+contributors: "charles-kagiri,sam-macharia"
+pubDate: 2026-11-25
+tags: ["geothermal", "drilling", "observability", "state-estimation", "vibration", "condition-monitoring"]
+excerpt: "We mapped where in the operating range surface torque, top drive speed and hook load can reveal what happens at the bit, one physical quantity at a time."
+citation:
+  journal: "Book of Abstracts of the 10th DeKUT International Conference on Science, Technology, Innovation and Entrepreneurship (STI&E 2026)"
+  year: 2026
+  doi: "10.33803/dgzvrs"
+  authors: ["John Petu", "Charles Kagiri", "Samuel Macharia Kang'iri"]
+---
+
+A geothermal well is drilled deep into hot rock, and the drill crew cannot see the bit. They see the surface: the torque at the top drive, its speed, and the hook load. Every scheme that monitors the bit from the surface assumes that these signals carry enough information to work out what is happening below. Many estimators are built on that assumption. Nobody has mapped where, across the range of drilling conditions, it actually holds.
+
+## What we did
+
+We asked the question one physical quantity at a time. We used a model of a drillstring that couples its axial and twisting motion, with a bit-rock law that depends on temperature. At each operating point we let the model settle, changed one quantity slightly, and measured how strongly surface torque, top drive speed and hook load responded compared with sensor noise. That response gives an index of how recoverable the quantity is. We did this at 90 operating points.
+
+We then ran a joint state and parameter estimator, an unscented filter, to see whether a real estimator follows the index.
+
+## What we found
+
+- Wearflat friction, the friction from bit wear, is recoverable at 58% of stick-slip points and only 4% of smooth-rotation points. The median index is 1585 times larger in stick-slip.
+- In smooth rotation the result is firm: friction cannot be seen from the surface.
+- In stick-slip the result depends on the time window. Over 21 window starts across one cycle, the stick-slip fraction is 50% to 67% and the ratio is 769 to 5626. The contrast with smooth rotation survives.
+- Rock specific energy behaves the other way, and only mildly: it is more often recoverable in smooth rotation, 32% of points against 8%.
+- At one stick-slip point, friction needs a sampling rate of 1.2 to 12 Hz from 10 window starts and below 1 Hz from the other 11. So friction has no firm sampling rate requirement.
+- Raising the temperature from 25 to 300 degrees changes no median index by more than 26%, along one line of 15 rotary speeds.
+- The filter follows the index for specific energy (rank correlation 0.74). It learns nothing about friction where the index is near zero, as predicted, and it is misled in stick-slip where the index is high. Over both parameters the correlation is minus 0.17.
+
+## Why it matters
+
+Before a drilling team trusts a surface-based estimate of the bit, it helps to know whether the surface signals can carry that information at all under the current conditions. This map says which quantities can be recovered, and in which drilling mode, so that effort goes into estimators that can work.
+
+## Limits
+
+This summary is written from the conference abstract. All results come from a drillstring model, not from field measurements on a geothermal rig. In stick-slip the index describes sensitivities, not firm local bounds. The temperature result covers one line of 15 rotary speeds.
+
+## Read the paper
+
+- Conference abstract: [doi.org/10.33803/dgzvrs](https://doi.org/10.33803/dgzvrs), Book of Abstracts of the 10th DeKUT International Conference on Science, Technology, Innovation and Entrepreneurship (STI&E 2026), 2026.
+- Authors: John Petu, Charles Kagiri, Samuel Macharia Kang'iri.

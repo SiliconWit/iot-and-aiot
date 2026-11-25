@@ -1,0 +1,50 @@
+---
+title: "Knowledge Distillation and Structured Pruning at Matched Footprint for Sub-50 KB Cattle Behaviour Classification"
+description: "A 1.72 KB cattle behaviour model trained plainly scores 0.681 macro F1 against 0.692 for a 127.1 KB teacher. At equal size, neither distillation nor pruning is reliably better, and a public dataset hid duplicate data."
+contributors: "bright-gitari,consolata-kiiru,sam-macharia"
+pubDate: 2026-11-25
+tags: ["precision-livestock-farming", "tinyml", "knowledge-distillation", "pruning", "dataset-integrity", "cattle"]
+excerpt: "Compression methods for collar models should be compared with a same-size network trained from scratch. On cattle data that control matches both methods, and a duplicate-data audit changes the scores more than either method does."
+citation:
+  journal: "Journal of Applied Science, Engineering and Technology for Development"
+  year: 2026
+  volume: 6
+  issue: 1
+  doi: "10.33803/kg23r7.2"
+  authors: ["Bright Mutuma Gitari", "Ying-Hsuan Chiang", "Consolata Wanjiru Kiiru", "Samuel Macharia Kang'iri"]
+---
+
+A change in how a cow grazes, ruminates, lies down or moves is an early sign of heat or illness. A collar with a motion sensor can catch it. Running the behaviour classifier on the collar means the collar does not have to send its raw motion data. The difficulty is size: a low-cost collar has a few tens of kilobytes for the model, and accurate classifiers are much larger.
+
+Two methods are usually proposed to shrink a model. Knowledge distillation trains a small network to copy a large one. Structured pruning cuts whole filters out of the large network and retrains what is left. Studies on collars test them one at a time, and they rarely compare them with the obvious alternative: a small network of the same size, trained directly from the labels.
+
+## What we did
+
+We used two public neck-accelerometer datasets: 6 Japanese Black beef cows and 30 pre-weaned calves. On each we trained a convolutional teacher and tested it on animals it had not seen, leaving one animal out at a time. We then reached the same small int8 size by three routes: distillation, structured pruning, and a same-size network trained from hard labels as the control. We compared the routes per animal, over five training seeds, and with two fine-tuning schedules.
+
+Before any of this, we audited the data for repeated signal between animals.
+
+## What we found
+
+- The first release of the beef dataset repeats data across animals. All 15 pairs of animals share byte-identical blocks of signal. Leaving it in place inflates macro F1 by 0.076, even when each animal is scored only on the behaviours it shows (p = 0.0007). The second release is free of it, and we used that one.
+- There is little for compression to recover. A 1.72 KB network trained from hard labels reaches 0.681 macro F1. The 127.1 KB teacher reaches 0.692.
+- Within that small gap, neither method is reliably better than the control. Structured pruning gained 0.0130 at one seed (p = 0.0096, n = 42), but its margin ranged from minus 0.0209 to plus 0.0145 over five seeds. At the smallest sizes it collapsed for some animals at three seeds.
+- When pruning was fine-tuned on the same schedule as the other routes, most collapses went away, and so did its margin: minus 0.0080 to plus 0.0038 over three seeds, never significant.
+- Distillation gained 0.0021 to 0.0086, significant at one seed.
+- On calves, where shrinking the model costs up to 0.077, pruning scored below the control at five of five seeds, significantly at two. So no ranking of the methods holds across both datasets.
+
+## Why it matters
+
+A study that compares a compressed model only with its teacher would call every method a success here, because a small network trained directly already matches the teacher. The same-size control costs one extra training run per size, and it shows whether the choice of method matters on the data at hand.
+
+The audit matters more. Results on the first release of the beef dataset are inflated by more than the effects that compression studies try to measure. The audit takes about a minute and applies to any dataset organised by animal or subject.
+
+## Limits
+
+No model was deployed. Weight size is exact, but latency and energy were not measured, and nothing was tested on a collar or on a farm. The routes were trained on schedules that were only partly equal, and the distillation result holds for one setting of its parameters. Five seeds and six beef animals give a small statistical base, and the p-values are not corrected for multiple tests. The audit finds only byte-identical repeats, not signal that was resampled or filtered before it was repeated. A more accurate teacher could leave a larger gap, and the methods might behave differently there.
+
+## Read the paper
+
+- Journal article: [doi.org/10.33803/kg23r7.2](https://doi.org/10.33803/kg23r7.2), Journal of Applied Science, Engineering and Technology for Development, volume 6, issue 1, 2026. [Download the PDF](https://jasetd.dkut.ac.ke/2026/kg23r7/kg23r7.pdf) from the journal, free to read.
+- Conference proceeding manuscript: [doi.org/10.33803/kg23r7](https://doi.org/10.33803/kg23r7), 10th DeKUT International Conference on Science, Technology, Innovation and Entrepreneurship, 2026.
+- Authors: Bright Mutuma Gitari, Ying-Hsuan Chiang, Consolata Wanjiru Kiiru, Samuel Macharia Kang'iri.

@@ -1,328 +1,53 @@
 ---
 title: "Practical Integration of IoT, Intercropping, and Gravity-Fed Drip Systems for Water-Efficient Smallholder Farming"
-description: "Up to 36.9% less water on smallholder farms: precision irrigation, intercropping and gravity-fed drip, measured alone and together"
+description: "Up to 36.9% less water on smallholder farms when IoT precision irrigation, intercropping and gravity-fed drip work together. Intercropping is the easiest place to start; IoT is the hardest."
 contributors: "charles-mzigo,wiktoria-sarzynska,charles-kagiri,sam-macharia"
 pubDate: 2025-08-28
-tags: ["precision-agriculture", "IoT", "water-efficiency", "smallholder-farming", "sustainable-agriculture"]
-excerpt: "This research demonstrates practical IoT integration in smallholder agriculture, achieving up to 36.9% water savings through combined IoT precision irrigation, intercropping, and gravity-fed drip systems."
+tags: ["precision-agriculture", "iot", "water-efficiency", "smallholder-farming", "drip-irrigation", "intercropping"]
+excerpt: "Modelled water savings rise from 8.6% for IoT irrigation alone to 36.9% when IoT, intercropping and gravity-fed drip are combined. A phased plan puts the low-barrier steps first."
 heroImage: "https://cdn.siliconwit.com/research/applied-engineering/practical-integration-of-IoT-intercropping-and-gravity-fed-drip-systems-for-water-efficient-smallholder-farming.png"
 citation:
   journal: "Internet of Things and Artificial Intelligence Journal"
   year: 2025
+  volume: 5
+  issue: 3
   doi: "10.31763/iota.v5i3.992"
+  authors: ["Charles Mzigo Kajanja", "Wiktoria Sarzyńska", "Charles Kagiri", "Samuel Macharia Kang'iri"]
 ---
 
-import IoTAIoTComments from '../../../../components/iot-and-aiot/IoTAIoTComments.astro';
-import TawkWidget from '../../../../components/TawkWidget.astro';
-import UniversalContentContributors from '../../../../components/UniversalContentContributors.astro';
-import InArticleAd from '../../../../components/InArticleAd.astro';
-import Copyright from '../../../../components/Copyright.astro';
-import BionicText from '../../../../components/BionicText.astro';
-import TailwindWrapper from '../../../../components/TailwindWrapper.jsx';
-import { Tabs, TabItem } from '@astrojs/starlight/components';
-import { Card, CardGrid, Badge, Steps, LinkButton, FileTree } from '@astrojs/starlight/components';
+In many developing regions, smallholder farmers face growing water scarcity. Advice on saving water often starts with technology: sensors, controllers and wireless links. For a farmer with little cash and no technician nearby, that is the hardest place to start. Simpler methods, such as planting crops together or running drip lines fed by gravity, are easier to adopt.
 
-<UniversalContentContributors 
-  contributors={frontmatter.contributors}
-/>
+The farmer needs to know two things: how much water each approach saves, alone and together, and which one to adopt first.
 
+## What we did
 
+We combined three approaches: IoT precision irrigation, intercropping, and gravity-fed drip irrigation.
 
-## Research objectives
+In the laboratory, we ran experiments with an ATmega2560 microcontroller and environmental sensors across three upland crop systems. We also designed a scalable architecture for field deployment, using STM32 microcontrollers with CC1101 radio modules to link the field nodes.
 
-This study investigates the practical integration of IoT technology with traditional agricultural practices to achieve significant water savings in smallholder farming systems, addressing the critical need for sustainable water management in agriculture.
+We then used mathematical modelling to estimate the water savings of each approach and of their combinations. Finally, we assessed how feasible each approach is to put into practice on a smallholder farm, and ranked them.
 
-The research demonstrates that combining IoT precision irrigation with intercropping and gravity-fed drip systems can achieve up to 36.9% water savings, providing a roadmap for sustainable agricultural intensification in resource-constrained environments.
+## What we found
 
+- IoT precision irrigation alone saves 8.6% of water.
+- Intercropping combined with IoT saves 19.0%.
+- Gravity-fed drip irrigation saves 22% as a baseline.
+- IoT combined with gravity-fed drip saves 28.7%.
+- Complete integration of all three saves 36.9%.
+- On feasibility, intercropping ranked highest because its barriers to adoption are low. IoT systems ranked lowest, despite their technical benefits.
 
-## Publication details
+## Why it matters
 
-<InArticleAd />
+The largest saving comes from combining the methods, not from any one of them. The method that is easiest to adopt is part of that combination. This gives a farmer, an extension officer or a project funder an order of work.
 
+We propose a phased roadmap. Start with the accessible techniques, such as intercropping, which have low barriers to adoption. Add IoT precision irrigation later, once the simpler steps are in place, to reach the full saving. This lets smallholders gain part of the benefit early and invest in technology when it adds to what they already have.
 
-<Card title="Publication Information">
+## Limits
 
-**Journal**: Internet of Things and Artificial Intelligence Journal  
-**Year**: 2025  
-**DOI**: [10.31763/iota.v5i3.992](https://doi.org/10.31763/iota.v5i3.992)  
-**Publisher**: ASCEE Publications  
-**Type**: Original Research Article
+This summary is written from the published abstract. The water savings come from mathematical modelling built on laboratory experiments, not from measured field seasons. The field architecture with STM32 and CC1101 radios was designed, but the abstract does not report a field deployment. The feasibility ranking is an assessment, not a survey of farmers' choices. Further research is needed on adaptations for specific climates and on economic optimization models before wider use.
 
-**Supplementary Material**: [github.com/SiliconWit/iot-irrigation-system](https://github.com/SiliconWit/iot-irrigation-system)
+## Read the paper
 
-</Card>
-
-## Research summary
-
-<InArticleAd />
-
-
-<Tabs>
-  <TabItem label="Key Findings">
-    ### Water savings achievements
-    
-    **Individual System Performance**:
-    - IoT precision irrigation alone: **8.6%** water savings
-    - Intercropping with IoT: **19.0%** water savings
-    - Gravity-fed drip irrigation baseline: **22%** water savings
-    - IoT + gravity-fed systems: **28.7%** water savings
-    - **Complete integration: 36.9%** water savings
-    
-    **Implementation Feasibility Ranking**:
-    1. **Intercropping** (highest feasibility, lowest barriers)
-    2. **Gravity-fed drip systems** (moderate implementation complexity)
-    3. **IoT systems** (lowest ranking due to technological barriers)
-    
-    ### Research impact
-    
-    The study provides a practical roadmap for phased implementation, prioritizing accessible techniques before advancing to sophisticated technological investments.
-  </TabItem>
-
-  <TabItem label="Methodology">
-    ### Experimental design
-    
-    **Hardware Implementation**:
-    - **ATmega2560 microcontroller** with environmental sensors
-    - **STM32 microcontrollers** with CC1101 RF modules
-    - Soil moisture, temperature, and humidity sensors
-    - Automated irrigation control systems
-    
-    **Agricultural Systems Tested**:
-    - Three upland crop systems in laboratory conditions
-    - Controlled comparison between traditional and integrated approaches
-    - Systematic evaluation of water usage efficiency
-    - Performance monitoring across growing seasons
-    
-    **Data Collection Protocol**:
-    - Continuous environmental parameter monitoring
-    - Irrigation volume measurement and optimization
-    - Crop yield and quality assessment
-    - Cost-benefit analysis of implementation
-    
-    **Integration Evaluation**:
-    - Stepwise implementation testing
-    - Synergistic effect analysis between technologies
-    - Practical deployment barrier assessment
-    - Economic feasibility evaluation
-  </TabItem>
-
-  <TabItem label="Applications">
-    ### Practical implementation
-    
-    **Smallholder Agriculture**:
-    - Water-scarce region applications
-    - Resource-constrained farming operations
-    - Sustainable intensification strategies
-    - Climate-resilient farming systems
-    
-    **IoT Agricultural Networks**:
-    - Distributed sensor deployment
-    - Remote monitoring capabilities
-    - Data-driven irrigation decisions
-    - Automated system control
-    
-    **Precision Agriculture**:
-    - Site-specific water management
-    - Real-time environmental monitoring
-    - Optimized resource utilization
-    - Sustainable production systems
-    
-    **Technology Transfer**:
-    - Developing country applications
-    - Extension service integration
-    - Farmer training programs
-    - Scalable deployment strategies
-  </TabItem>
-</Tabs>
-
-## Research impact
-
-<InArticleAd />
-
-
-<CardGrid>
-  <Card title="Water Conservation">
-    **Environmental Sustainability**
-    
-    - Up to 36.9% reduction in water consumption
-    - Scalable water management solutions
-    - Climate change adaptation strategies
-    - Sustainable agricultural intensification
-  </Card>
-  
-  <Card title="Technology Integration">
-    **IoT Innovation**
-    
-    - Practical IoT implementation in agriculture
-    - Multi-technology system integration
-    - Real-world deployment validation
-    - Scalable IoT architecture demonstration
-  </Card>
-  
-  <Card title="Economic Viability">
-    **Practical Solutions**
-    
-    - Cost-effective water management
-    - Phased implementation approach
-    - Barrier-aware technology deployment
-    - Economic sustainability focus
-  </Card>
-  
-  <Card title="Social Impact">
-    **Smallholder Support**
-    
-    - Accessible technology solutions
-    - Food security enhancement
-    - Rural livelihood improvement
-    - Knowledge transfer facilitation
-  </Card>
-</CardGrid>
-
-## Detailed analysis
-
-<InArticleAd />
-
-
-### IoT system architecture
-
-The research implements a comprehensive IoT solution:
-
-- **Sensor Networks**: Distributed environmental monitoring
-- **Microcontroller Integration**: ATmega2560 and STM32 platforms
-- **Wireless Communication**: CC1101 RF modules for reliable data transmission
-- **Automated Control**: Real-time irrigation system management
-
-### Water efficiency mechanisms
-
-<Steps>
-
-1. **IoT Precision Monitoring**
-   
-   Continuous soil moisture and environmental parameter monitoring enabling precise irrigation timing and quantity control.
-
-2. **Intercropping Benefits**
-   
-   Strategic crop combinations that improve water use efficiency through complementary root systems and microclimate modification.
-
-3. **Gravity-Fed Efficiency**
-   
-   Baseline 22% water savings through targeted water delivery with minimal energy requirements.
-
-4. **Synergistic Integration**
-   
-   Combined systems achieving 36.9% water savings through complementary mechanisms and optimized resource utilization.
-
-</Steps>
-
-### Implementation strategy
-
-The research provides a practical deployment framework:
-
-#### Phase 1: traditional methods
-- **Intercropping implementation** (highest feasibility)
-- **Gravity-fed drip systems** (established technology)
-- **Foundation building** for advanced integration
-
-#### Phase 2: technology integration
-- **IoT sensor deployment** (graduated approach)
-- **System integration** (building on established practices)
-- **Performance optimization** (data-driven improvements)
-
-#### Phase 3: advanced systems
-- **Full integration** (complete system deployment)
-- **Automated control** (minimal manual intervention)
-- **Scaling strategies** (broader deployment)
-
-## Technological innovations
-
-<InArticleAd />
-
-
-### Hardware integration
-
-**Microcontroller Selection**:
-- **ATmega2560**: Primary control and sensor integration
-- **STM32**: Specialized communication and processing
-- **Modular design**: Scalable and maintainable architecture
-
-**Sensor Systems**:
-- **Environmental monitoring**: Soil moisture, temperature, humidity
-- **Irrigation control**: Automated valve and pump management
-- **Data logging**: Continuous parameter recording
-
-**Communication Networks**:
-
-- **CC1101 RF modules**: Reliable wireless communication
-- **Network topology**: Optimized for agricultural environments
-- **Range and reliability**: Field-tested performance
-
-### Agricultural system design
-
-**Intercropping Optimization**:
-- **Crop selection strategies** for water efficiency
-- **Spatial arrangement** for optimal resource utilization
-- **Growth cycle coordination** for continuous production
-
-**Irrigation System Integration**:
-- **Gravity-fed baseline** for energy efficiency
-- **IoT enhancement** for precision control
-- **Combined benefits** exceeding individual systems
-
-## Economic and social considerations
-
-<InArticleAd />
-
-
-### Implementation barriers
-
-The research identifies key deployment challenges:
-
-- **Technology complexity**: IoT systems require technical expertise
-- **Cost considerations**: Initial investment requirements
-- **Training needs**: Farmer education and support
-- **Infrastructure requirements**: Power and connectivity needs
-
-### Economic benefits
-
-- **Water cost reduction**: Up to 36.9% savings on irrigation water
-- **Yield optimization**: Improved crop production efficiency
-- **Resource efficiency**: Reduced input costs through precision application
-- **Long-term sustainability**: Reduced environmental impact costs
-
-## Future research directions
-
-<InArticleAd />
-
-
-### Immediate applications
-- **System scaling** for larger agricultural operations
-- **Crop-specific optimization** for different agricultural systems
-- **Climate adaptation** for various environmental conditions
-
-### Technology development
-- **Enhanced sensor integration** for additional parameters
-- **Artificial intelligence** for predictive irrigation control
-- **Mobile applications** for farmer interface and control
-
-### Policy and extension
-- **Government program integration** for wider deployment
-- **Extension service training** for technology transfer
-- **Policy framework development** for sustainable agriculture support
-
-## Further reading
-
-<InArticleAd />
-
-
-For comprehensive details on IoT implementation, agricultural integration methods, and water efficiency results:
-
-**Access the Full Paper**: [IoT in Agriculture - Practical Integration Study](https://pubs.ascee.org/index.php/iota/article/view/992)
-
-This research provides a practical framework for integrating IoT technology with traditional agricultural practices, demonstrating significant potential for sustainable water management in smallholder farming systems.
-
-
-
-<InArticleAd />
-<IoTAIoTComments />
-<TawkWidget />
-<Copyright />
+- Journal article: [doi.org/10.31763/iota.v5i3.992](https://doi.org/10.31763/iota.v5i3.992), Internet of Things and Artificial Intelligence Journal, volume 5, issue 3, 2025. [Read it at the journal](https://pubs.ascee.org/index.php/iota/article/view/992).
+- Supplementary code: [github.com/SiliconWit/iot-irrigation-system](https://github.com/SiliconWit/iot-irrigation-system).
+- Authors: Charles Mzigo Kajanja, Wiktoria Sarzyńska, Charles Kagiri, Samuel Macharia Kang'iri.

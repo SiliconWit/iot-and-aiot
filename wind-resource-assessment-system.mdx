@@ -1,0 +1,46 @@
+---
+title: "Design and Implementation of an Advanced System for Wind Resource Assessment"
+description: "A wireless system that collects wind data from remote masts, analyses it without a person in the loop and reports speed and direction distributions and power predictions. Wind speed fits within plus or minus 0.063398 m/s."
+contributors: "sam-macharia"
+pubDate: 2026-11-25
+tags: ["wind-energy", "wind-resource-assessment", "iot", "wireless-sensor-networks", "3d-printing", "anemometer"]
+excerpt: "A 3D-printed cup-vane sensor node and a fog-cloud connected sink node collect, analyse and report wind data in one system, to lower the cost of assessing a wind site."
+citation:
+  journal: "Dedan Kimathi University of Technology"
+  year: 2019
+  doi: "10.5281/ZENODO.5573869"
+  authors: ["Kang'iri Samuel Macharia"]
+---
+
+Before anyone installs a wind turbine, they must measure the wind at the site for at least a year and then write a detailed resource assessment. In developing countries, both the instruments and the expertise for this are usually imported. That cost slows down wind investment where it is most needed: by the end of 2017, Africa and the Middle East together held only 0.84% of the world's installed wind capacity.
+
+The work itself is also split. Existing instruments cannot, on their own, collect data from many masts far apart, analyse it without a person, and give the user the results when needed. One specialist handles the instruments and another handles the analysis.
+
+## What we did
+
+We designed and built one system that does all three steps. It acquires wind data wirelessly and in real time from remote locations, analyses it automatically, and stores and delivers the results securely when the user asks.
+
+The field instrument is a wireless sensor node. We designed the cup-vane anemometer parts, 3D-printed them, installed the embedded electronics and assembled the full instrument. We then calibrated it in the laboratory.
+
+On the other end, we wrote software for a minicomputer that acts as the sink node and is connected to fog and cloud services using Internet of Things (IoT) technology. It receives the data and carries out the required analysis and data management according to settings the user chooses.
+
+## What we found
+
+- After installation, the system collected wind data reliably, with a mean fitting deviation of plus or minus 0.063398 m/s.
+- It stored and analysed the data and sent results to the user on request.
+- The results included wind speed distributions, wind direction distributions and power predictions.
+- It was verified in the laboratory at wind speeds from 1 to 16 m/s and outdoors in an open field at 1 to 5 m/s.
+
+## Why it matters
+
+For a developer, an energy agency or a small wind farmer, a site assessment is an upfront cost paid before any power is sold. A system built from 3D-printed parts and standard electronics, which also does the analysis, means fewer imported instruments and fewer specialist hours per site. That is the aim of the thesis: to bring down the cost of wind resource assessment and so make wind power investment easier, especially in developing countries.
+
+## Limits
+
+This summary is written from the thesis abstract. The outdoor test covered low wind speeds only, 1 to 5 m/s; higher speeds were tested only in the laboratory. The abstract does not report a full year of field data from one site, which a real assessment needs, and it does not report cost figures against commercial instruments. Long-term durability of the 3D-printed parts outdoors is not described.
+
+## Read the paper
+
+- Thesis: [doi.org/10.5281/ZENODO.5573869](https://doi.org/10.5281/ZENODO.5573869), Dedan Kimathi University of Technology, 2019.
+- Related journal article on the sensor node: [Design and Calibration of a 3D-Printed Cup-Vane Wireless Sensor Node](/research/iot-and-aiot/3d-printed-wireless-sensor-nodes/).
+- Authors: Kang'iri Samuel Macharia.

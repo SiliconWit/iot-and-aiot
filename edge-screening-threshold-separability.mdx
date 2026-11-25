@@ -1,0 +1,48 @@
+---
+title: "When the Screening Threshold Does Not Depend on the Epidemic: Separability in Edge-Assisted Crop Disease Surveillance"
+description: "A camera node that screens leaves and sends only suspicious images over 2G has two settings. We show the screening threshold can be set once for every site; only the inspection interval needs tuning per site."
+contributors: "sam-macharia"
+pubDate: 2026-11-25
+tags: ["crop-disease", "edge-inference", "offloading", "plant-disease-epidemics", "threshold-optimisation", "2g"]
+excerpt: "The screening threshold depends only on how the leaf index looks for healthy and diseased leaves and on the recall of the cloud classifier. The epidemic, the link and the costs set the inspection interval alone."
+citation:
+  journal: "Journal of Applied Science, Engineering and Technology for Development"
+  year: 2026
+  volume: 6
+  issue: 1
+  doi: "10.33803/yrtpzm.2"
+  authors: ["Michael Muigai", "Peterson Nyaga", "Morris Kimathi Mwangi", "Samuel Macharia Kang'iri"]
+---
+
+A solar-powered camera in a smallholder kale plot cannot send every leaf image it takes. On a rural 2G link, each image costs seconds of airtime and joules of battery, and the node may have to run a whole season unattended. So the node computes a cheap score for each leaf and sends only the images that look suspicious. A classifier in the cloud then decides on what arrives.
+
+The person who installs such a node has to choose two settings. The screening threshold decides which images are sent. It sets the airtime bill and how often a diseased leaf is wrongly cleared. The inspection interval decides how long a wrongly cleared leaf waits before the node looks again, and the disease keeps spreading in the meantime. Because of that link, theory from inspection and maintenance design says the two should be tuned together. In practice they are set separately.
+
+## What we did
+
+We built the full cost for the node from three parts: a likelihood ratio test on a single leaf index, a renewal model of the 2G uplink, and a logistic curve for disease progress. We then asked whether the best threshold depends on the epidemic at all.
+
+We proved that it does not, under three conditions. First, the chance of detecting a diseased leaf at one inspection does not change with time since infection or between leaves. Second, the loss depends on the mean detection delay. Third, the costs that depend on the interval do so only through the offload rate. We then checked the result numerically and relaxed each condition in turn.
+
+## What we found
+
+- At the optimum, the threshold depends only on how the leaf index is distributed for healthy and diseased leaves and on the recall of the cloud classifier. The infection rate, the link, the image size and the cost weights set only the interval.
+- Numerically, the threshold stays at 0.2835, to within 0.0000014, across all swept parameters and four loss functions. Over the same sweep, the best interval ranges from 5.7 to 22.2 days.
+- The threshold does not move under a nonlinear tariff on daily data volume or under an energy budget.
+- It moves to between 0.291 and 0.326 when the cloud classifier's recall rises with disease severity.
+- It moves most, to between 0.239 and 0.271, when parts of the plot differ in both infection rate and leaf index. There, a threshold computed from pooled data costs up to 8.5% more than the optimum.
+- Where the conditions hold, tuning both settings together saves only 4.9% against a weekly inspection schedule.
+
+## Why it matters
+
+For anyone installing many nodes, this removes a site-by-site tuning job. Measure the leaf index on labelled healthy and diseased leaves and the recall of the cloud classifier, set the threshold once, and tune only the inspection interval for each site. The joint search adds little where the conditions hold. The paper also names the case where it does matter: plots whose parts differ in both infection rate and leaf appearance.
+
+## Limits
+
+No quantity in this study is measured. The leaf index distributions, the link goodput and retransmission rate, the transmit current and the cloud recall are all assumed or taken from datasheets, so the operating points are illustrative. The departures tested were chosen to be plausible, not fitted, and several departures at once need not add up simply. The result needs an interior optimum; for the three most overlapping density pairs the optimiser runs to a boundary. Only one scalar leaf index and one threshold are considered.
+
+## Read the paper
+
+- Journal article: [doi.org/10.33803/yrtpzm.2](https://doi.org/10.33803/yrtpzm.2), Journal of Applied Science, Engineering and Technology for Development, volume 6, issue 1, 2026. [Download the PDF](https://jasetd.dkut.ac.ke/2026/yrtpzm/yrtpzm.pdf) from the journal, free to read.
+- Conference proceeding manuscript: [doi.org/10.33803/yrtpzm](https://doi.org/10.33803/yrtpzm), 10th DeKUT International Conference on Science, Technology, Innovation and Entrepreneurship, 2026.
+- Authors: Michael Muigai, Peterson Nyaga, Morris Kimathi Mwangi, Samuel Macharia Kang'iri.

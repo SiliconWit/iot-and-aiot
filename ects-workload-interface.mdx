@@ -1,0 +1,40 @@
+---
+title: "Development of interface for control of the postgraduate students workload in terms of ECTS credits"
+description: "A mathematical model, built with a Box-Behnken design, that turns lecture, exercise and laboratory hours into the self-study hours and ECTS credits a course should carry."
+contributors: "jean-byiringiro,sam-macharia"
+pubDate: 2026-11-25
+tags: ["ects", "credit-transfer", "student-workload", "box-behnken", "higher-education"]
+excerpt: "ECTS assigns credits by workload but gives no clear rule linking contact hours to self-study hours. This model supplies one."
+citation:
+  journal: "Zenodo"
+  year: 2016
+  doi: "10.5281/zenodo.5573980"
+  authors: ["Byiringiro Jean Bosco", "Rosemary Kagondu", "Samuel Macharia Kang'iri", "Sultan Mukhlis"]
+---
+
+A university that designs a postgraduate course for students from many countries has to state its workload in a common unit. The European Credit Transfer System (ECTS) is that unit. It is centred on the student and assigns credits to learning outcomes according to the workload of an average learner. But ECTS gives no clear, logical method that links the credits to a given mix of lecture hours, exercise hours, laboratory hours and self-study hours. Course designers are left to estimate the self-study load.
+
+## What we did
+
+We set out to build a mathematical model that takes the three kinds of contact time, lecture, exercise and laboratory hours, and gives the right number of self-study hours for that workload. From these, the model assigns the correct number of ECTS credits.
+
+We analysed input and output data with the Box-Behnken design method, a standard way to plan and fit experiments with several input variables using fewer runs than a full grid. The result is a model that relates the four variables and assigns credits to a given workload. The work also aimed at an interface that staff can use to control the workload of postgraduate students.
+
+## What we found
+
+- The model gives the self-study hours, and so the credits, for any combination of lecture, exercise and laboratory hours within its range.
+- Two different mixes give the same result. Two lecture hours, one exercise hour and one laboratory hour need the same number of self-study hours as two lecture hours and two laboratory hours.
+- In both cases the total workload translates to five ECTS credits.
+
+## Why it matters
+
+A student who moves between universities needs credits that mean the same thing in both places. A course designer needs a rule, not a guess, to set the self-study load. A model that turns contact hours into self-study hours and credits makes the allocation consistent and easy to check, and it shows which mixes of teaching are equal in workload.
+
+## Limits
+
+This summary is written from the abstract. The abstract does not describe the data set behind the model, how the input and output values were obtained, or how the model was validated against real student workload. The model covers three kinds of contact time; other activities, such as projects or field work, are not included. The interface itself is not described in the abstract.
+
+## Read the paper
+
+- Journal article: [doi.org/10.5281/zenodo.5573980](https://doi.org/10.5281/zenodo.5573980), deposited on Zenodo, 2016.
+- Authors: Byiringiro Jean Bosco, Rosemary Kagondu, Samuel Macharia Kang'iri, Sultan Mukhlis.

@@ -1,0 +1,39 @@
+---
+title: "Low-cost Edge AI System for Localised Weather Data Collection and Predictive Agricultural Analytics"
+description: "A farm weather station that measures the microclimate of one field and runs a compressed prediction model on an STM32H7, so the farm gets local predictions without waiting on the cloud. Field results are not yet recorded."
+contributors: "sam-macharia"
+pubDate: 2026-11-25
+tags: ["edge-ai", "tinyml", "weather-station", "microclimate", "agriculture", "stm32"]
+excerpt: "Regional forecasts cover grids 20 to 50 km wide and miss the microclimate of a single farm. This station measures that microclimate and runs its prediction model on the station itself."
+citation:
+  journal: "Book of Abstracts of the 10th DeKUT International Conference on Science, Technology, Innovation and Entrepreneurship (STI&E 2026)"
+  year: 2026
+  doi: "10.33803/2gpcdt"
+  authors: ["Allan Ng'ang'a Gacheru", "Sylvia Wambui Kinga", "S Njeri Mburu", "Isaac Wasike", "Edger Okoth", "Erick Kipkemoi", "Sam Harol Bahati", "Samuel Macharia Kang'iri"]
+---
+
+A weather forecast for a farming region is computed on a grid of squares 20 to 50 km wide. One number stands for the whole square. Two farms in the same square can have different temperature, humidity, pressure and wind, and those small differences decide how much water the crop needs and how healthy it stays. The farmer gets a forecast for the region, not for the field.
+
+## What we did
+
+We designed a station that measures the field itself and turns the readings into predictions on the spot. It uses an array of ultrasonic anemometers for wind, a BH1750 sensor for ambient light, and a BME280 sensor for temperature, humidity and pressure. The readings go to an STM32H753 microcontroller.
+
+The station sends its data over GPRS with a SIM800L module, using MQTT, to the SiliconWit.io cloud dashboard. In parallel, we train machine learning models in Python with TensorFlow. Each model is compressed to 8-bit integers (INT8 post-training quantization) and loaded onto the STM32H7. It runs there with TensorFlow Lite for Microcontrollers, so the station makes its own predictions in real time. The results are sent to a web dashboard and an Android app.
+
+## What we found
+
+- Development and field deployment are still in progress. No final measurements have been recorded.
+- The design targets are: high-resolution microclimate data, reliable running of the INT8 model on the STM32H7, and clear display of results on the web dashboard and the Android app.
+
+## Why it matters
+
+Rural farms often have weak or intermittent mobile coverage. A station that predicts on its own does not need a round trip to the cloud for each result, so the farmer still gets an answer when the network is down. The design joins local sensing, prediction on the station and cloud records in one system.
+
+## Limits
+
+This summary is written from the conference abstract. The system is not yet complete. There are no field data, no accuracy figures for the prediction models, and no measurements of power use or of how often the link fails. The abstract does not say which quantities the models predict. The benefits described above are design goals that the field deployment still has to confirm.
+
+## Read the paper
+
+- Conference poster: [doi.org/10.33803/2gpcdt](https://doi.org/10.33803/2gpcdt), Book of Abstracts of the 10th DeKUT International Conference on Science, Technology, Innovation and Entrepreneurship (STI&E 2026), 2026.
+- Authors: Allan Ng'ang'a Gacheru, Sylvia Wambui Kinga, S Njeri Mburu, Isaac Wasike, Edger Okoth, Erick Kipkemoi, Sam Harol Bahati, Samuel Macharia Kang'iri.

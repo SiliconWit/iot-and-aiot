@@ -1,0 +1,45 @@
+---
+title: "Offline-first ESP32 Scalable System That Waters Amaranth And Spots Disease Early"
+description: "A single ESP32 waters amaranth only when the soil is dry, keeps watering when the internet is down, and sends readings to the cloud for pest, disease, nutrient and harvest warnings. Tested so far in simulation."
+contributors: "sam-macharia"
+pubDate: 2026-11-25
+tags: ["irrigation", "crop-disease", "automation", "agritech", "esp32", "smallholder-farming"]
+excerpt: "Irrigation decisions run on the ESP32 itself, so the crop is watered even without internet, while cloud models look for pests, disease, nutrient problems and the best harvest time."
+citation:
+  journal: "Book of Abstracts of the 10th DeKUT International Conference on Science, Technology, Innovation and Entrepreneurship (STI&E 2026)"
+  year: 2026
+  doi: "10.33803/ranvpn"
+  authors: ["Brian Muchai Kaguri", "Said Kombe Rajabu", "Benson Muchoki Ndung'u", "Brian Kasili Wamalwa", "Vincent Lakilau Kipkalis", "Samuel Macharia Kang'iri"]
+---
+
+Many smallholder farmers still water by hand and check their crops by eye for pests, disease and nutrient problems. The decisions depend on the person, water is wasted, and yields vary from season to season. Crop health depends on moisture, temperature, humidity, nutrients, disease pressure and maturity acting together. When each is watched on its own, the grower reacts to symptoms, not to causes.
+
+Tools exist for parts of the problem. IoT irrigation saves water, and small image models can detect leaf disease with over 90% accuracy. Few systems do both.
+
+## What we did
+
+We designed one low-cost system for amaranth that waters only when the soil needs it and warns about pests, disease, nutrient status and the best time to harvest.
+
+Sensors measure soil moisture, air temperature and humidity, water flow and soil nitrogen, phosphorus and potassium (NPK). A camera module takes leaf images. An ESP32 microcontroller controls the field.
+
+The irrigation decision runs on the ESP32, so watering continues without internet. When soil moisture falls below a set threshold, relays start the pump and open the solenoid valves. A flow sensor records the water applied, and the valves close once the moisture recovers.
+
+Readings go over Wi-Fi to the SiliconWit.io cloud. Machine learning models there are meant to detect pests and disease, predict nutrient status and estimate harvest time from the time-series data. We tested the control circuit in a Proteus simulation and designed a custom PCB for the prototype.
+
+## What we found
+
+- The Proteus simulation confirmed automatic watering: the pump started when soil moisture fell below the threshold.
+- Real-world installation and data collection are planned for the fourth quarter.
+
+## Why it matters
+
+A farmer gets watering that follows the soil, not a fixed routine, and it does not stop when the network does. The same single controller also feeds the cloud models that give early warnings. If field tests confirm the design, the farmer would rely less on guesswork for both watering and crop checks.
+
+## Limits
+
+This summary is written from the conference abstract. The only result so far is a circuit simulation. There are no field measurements of water saved, and the pest, disease, nutrient and harvest models have not yet been trained on local data. The next step is to train an image model on local amaranth leaves and test whether colour images can estimate nutrient status and detect disease in real field conditions.
+
+## Read the paper
+
+- Conference poster: [doi.org/10.33803/ranvpn](https://doi.org/10.33803/ranvpn), Book of Abstracts of the 10th DeKUT International Conference on Science, Technology, Innovation and Entrepreneurship (STI&E 2026), 2026.
+- Authors: Brian Muchai Kaguri, Said Kombe Rajabu, Benson Muchoki Ndung'u, Brian Kasili Wamalwa, Vincent Lakilau Kipkalis, Samuel Macharia Kang'iri.

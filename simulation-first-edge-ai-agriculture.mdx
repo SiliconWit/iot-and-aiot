@@ -1,0 +1,53 @@
+---
+title: "A Simulation-First Edge AI Framework for Agricultural Decision Support: Separating Observability Limits from Quantization Error"
+description: "A weather node that reports 97.0% agreement on irrigation days can have no skill at all. The decision depends on soil water the node never senses. Running the water balance on the node fixes it."
+contributors: "john-kibe,sam-macharia"
+pubDate: 2026-11-25
+tags: ["edge-ai", "agriculture", "irrigation", "decision-support", "observability", "fao-56"]
+excerpt: "Before a small farm model is compressed for a microcontroller, check that its decision can be recovered from what the sensors see. For irrigation on a weather-only node, it cannot."
+citation:
+  journal: "Journal of Applied Science, Engineering and Technology for Development"
+  year: 2026
+  volume: 6
+  issue: 1
+  doi: "10.33803/y448fy.2"
+  authors: ["John Nyamu Kibe", "Morris Kimathi Mwangi", "Samuel Macharia Kang'iri"]
+---
+
+A farmer who buys a small weather node wants it to say when to irrigate, when to apply fertilizer and when blight is likely. These nodes are cheap because they sense only the air: temperature, humidity, wind and pressure. The decisions, however, depend on the soil and the crop. Irrigation depends on how much water is left in the root zone, and the node does not measure that.
+
+The usual way to build such a node is to train a small classifier to copy the decisions of a larger crop model, compress it to fit a microcontroller, and report how often it agrees. The agreement is often above 95%. Irrigation is needed on only a few days each season, so a model that always says "do not irrigate" also scores above 95%. A high score can hide a model that has learned nothing.
+
+## What we did
+
+We built a simulated farm where the hidden state behind every decision is known exactly. A weather generator fitted to 20 years of NASA POWER data for a site in the central Kenyan highlands produced 40 years of daily weather. It drove three reference models for a dry-season potato crop: the FAO-56 dual crop coefficient water balance for irrigation, thermal time for fertilizer timing, and a blight severity model for pest risk. The growing seasons gave 5,200 days.
+
+For each decision we fitted the same small linear model several ways: from the calendar alone, from the sensed weather with and without the calendar, and with the hidden state supplied directly. We scored each one with the Matthews correlation, which is zero for a model with no skill, as well as plain agreement. Test blocks were split in time with a 30 day gap on each side so that rolling averages could not leak across. We repeated the study over six generator seeds.
+
+We then tested a different design: run the water balance itself on the node, with a rain gauge, and estimate evapotranspiration as FAO-56 recommends when radiation is not measured.
+
+## What we found
+
+- Irrigation timing agrees with the reference on 97.0% of days. The majority-class rate is also 97.0%, and the Matthews correlation is minus 0.001. The model has no skill.
+- Supplying the hidden soil water depletion raises the same linear model to 0.858. Adding rainfall inputs, including rainfall minus evapotranspiration since planting, leaves it near zero. A larger model does not help either.
+- Fertilizer timing scores 0.875, but the day of year alone scores 0.892. Without the calendar the score falls to 0.266, and over six seeds it ranges from 0.032 to 0.266. The classifier is predicting the calendar.
+- Pest risk is partly observable: 0.497 from the sensors against 0.984 with the hidden severity.
+- Running the water balance on the node reproduces the reference irrigation schedule to a median of 1 day. Scored as events with a three day tolerance, F1 is 0.757, against 0.299 when scored day by day. Calibrated Hargreaves, the temperature-only method, scores lower at every seed.
+- Compressing the classifiers to 16-bit fixed point (Q15) changes no decision in 5,200 samples.
+
+## Why it matters
+
+For nodes like this, decision quality is limited by what the sensors can observe, not by compression. A team can spend weeks shrinking a model that was never able to make the decision. Our test needs only a few extra model fits: score the decision against the base rate, the calendar alone and the hidden state. That shows early whether more engineering can help at all.
+
+Where the decision depends on a running total, such as soil water, the total should be computed on the node, and the result should be scored as events, not day by day.
+
+## Limits
+
+The reference is a model, not a field trial. Agreement with it is not the same as good agronomy, and a node that copies it also copies its errors. The weather generator is fitted to one site, and the sizes of the effects depend on its climate and soil constants. The results hold for the assumed sensor suite; a soil moisture probe would make irrigation observable. The on-node water balance was tested in simulation with sensor readings free of error, and its cost on a real microcontroller was not measured. The three day tolerance is a stated convention, not an agronomic finding.
+
+## Read the paper
+
+- Journal article: [doi.org/10.33803/y448fy.2](https://doi.org/10.33803/y448fy.2), Journal of Applied Science, Engineering and Technology for Development, volume 6, issue 1, 2026. [Download the PDF](https://jasetd.dkut.ac.ke/2026/y448fy/y448fy.pdf) from the journal, free to read.
+- Conference proceeding manuscript: [doi.org/10.33803/y448fy](https://doi.org/10.33803/y448fy), 10th DeKUT International Conference on Science, Technology, Innovation and Entrepreneurship, 2026.
+- Code: [github.com/SiliconWit/weather-node-decision-observability](https://github.com/SiliconWit/weather-node-decision-observability).
+- Authors: John Nyamu Kibe, Morris Kimathi Mwangi, Samuel Macharia Kang'iri.

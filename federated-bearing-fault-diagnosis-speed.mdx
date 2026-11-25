@@ -1,0 +1,50 @@
+---
+title: "Speed-Induced Dilation and Prototype Alignment in Federated Bearing Fault Diagnosis"
+description: "A bearing fault model trained at some shaft speeds fails at a new one. Plotting the spectrum on a log frequency axis turns the speed change into a simple shift, and accuracy at an unseen speed rises from 59.6% to 81.0%."
+contributors: "joseph-disamalu,sam-macharia"
+pubDate: 2026-11-25
+tags: ["bearing-faults", "vibration", "federated-learning", "condition-monitoring", "machine-learning"]
+excerpt: "Fault frequencies scale with shaft speed. On a log frequency axis a speed change becomes a shift, which a convolutional model can absorb without measuring the speed."
+citation:
+  journal: "Journal of Applied Science, Engineering and Technology for Development"
+  year: 2026
+  volume: 6
+  issue: 1
+  doi: "10.33803/8judye.2"
+  authors: ["Joseph Munene Disamalu", "Morris Kimathi Mwangi", "Samuel Macharia Kang'iri"]
+---
+
+A worn bearing gives warning weeks before it seizes. The warning is in the vibration: each kind of damage, on the outer race, the inner race or a rolling element, repeats at its own frequency. A model that has learned those frequencies can call the fault early, while the repair is still a planned stop and not a wrecked shaft.
+
+The trouble starts when the same model is used on a machine that turns at a different speed. Every fault frequency moves with the shaft. A model trained at 600 rpm and used at 1000 rpm sees peaks in places it never saw, and its accuracy falls. The problem grows when several sites train one shared model without sending their raw data to each other (federated learning), because each site runs its machines at its own speeds.
+
+## What we did
+
+The usual fix treats a speed change as a general mismatch between data sets and corrects it with general methods. We asked a narrower question: does the shape of this particular mismatch allow a simpler fix?
+
+It does. Because every fault frequency is a fixed multiple of the shaft speed, two machines at different speeds differ by one stretch factor, the speed ratio. On a logarithmic frequency axis, a stretch becomes a plain shift. A convolutional model that pools over the whole spectrum does not care where a pattern sits, so it can absorb that shift.
+
+We tested this on two public bearing data sets (JNU and CWRU), training at some speeds and testing at a speed the model never saw. We compared the log axis with the usual alternative, order normalisation, which rescales the spectrum by the shaft speed, measured or estimated from the vibration itself. Then we ran it across six simulated sites in a federated setup, with and without an extra step that aligns each site's class prototypes.
+
+## What we found
+
+- The shift is real and needs nothing fitted: on bearing envelope spectra it holds to within 5.6% for speed ratios up to 1.67.
+- The log axis helps only the right kind of model. For a convolutional encoder it adds 18.8 points of accuracy at an unseen speed. For random forests and logistic regression, which read each frequency bin on its own, it changes little (minus 2.6 and minus 0.6 points).
+- Where speeds barely differ, it does nothing, as the theory predicts. On CWRU, whose speeds differ by only 4.4%, the gain is 0.0 points.
+- It matches order normalisation, it does not beat it. The difference is 1.6 points and not significant. What the log axis removes is the need to know the speed at all.
+- Across six federated sites, accuracy at the unseen speed rises from 59.6% to 81.0%, at a small cost at the training speeds (91.3% against 94.6%).
+- Prototype alignment adds 1.8 points, which is not significant over 15 paired runs. Once the representation matches the shift, there is little left for alignment to correct.
+
+## Why it matters
+
+Plants rarely run every motor at one speed, and few small sites have a speed sensor on each shaft. A model that works across speeds, without a tachometer and without each site sending its raw vibration data to the others, is cheaper to install and easier to trust. Where the speed can be measured, the paper's advice is plain: rescale by order and use a simple classifier, which reaches at least 84.6%.
+
+## Limits
+
+The study uses public laboratory data; no new measurements were recorded. A margin condition derived in the paper predicts accuracy well in simulation (Spearman 0.94), but on measured data that condition is never met, so it is not shown to predict accuracy in the field. The federated results come from simulated sites built on the same data sets.
+
+## Read the paper
+
+- Journal article: [doi.org/10.33803/8judye.2](https://doi.org/10.33803/8judye.2), Journal of Applied Science, Engineering and Technology for Development, volume 6, issue 1, 2026. [Download the PDF](https://jasetd.dkut.ac.ke/2026/8judye/8judye.pdf) from the journal, free to read.
+- Conference proceeding manuscript: [doi.org/10.33803/8judye](https://doi.org/10.33803/8judye), 10th DeKUT International Conference on Science, Technology, Innovation and Entrepreneurship, 2026.
+- Authors: Joseph Munene Disamalu, Morris Kimathi Mwangi, Samuel Macharia Kang'iri.

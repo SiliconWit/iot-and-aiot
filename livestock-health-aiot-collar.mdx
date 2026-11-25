@@ -1,0 +1,44 @@
+---
+title: "Hybrid Edge-Cloud AI for Livestock Behaviour and Health Monitoring Using an AIoT Wearable Collar"
+description: "A low-cost cow collar that classifies behaviour on the collar, tracks skin temperature and sends oestrus alerts over LoRa, so farm attendants can follow up sooner. The design is not yet field-tested."
+contributors: "sam-macharia"
+pubDate: 2026-11-25
+tags: ["livestock", "precision-livestock-farming", "tinyml", "aiot", "lora", "oestrus-detection"]
+excerpt: "A collar with a motion sensor and a skin temperature sensor classifies cow behaviour on the collar and sends summaries and oestrus alerts to the farm over LoRa."
+citation:
+  journal: "Book of Abstracts of the 10th DeKUT International Conference on Science, Technology, Innovation and Entrepreneurship (STI&E 2026)"
+  year: 2026
+  doi: "10.33803/j5pueh"
+  authors: ["Patty Mailu Mutinda", "David M Ngari", "Samwel Kamau", "Benson Nganga", "Jeff Kamau", "Leone Njiru", "Brian Koech", "Samuel Macharia Kang'iri"]
+---
+
+A smallholder dairy farmer checks the cows a few times a day. Between those checks, changes in behaviour can go unseen, including the signs that a cow is in heat. A missed heat may delay breeding and lower the farm's productivity. The farmer also has no written record of each animal's history, which could help when asking a lender for credit.
+
+## What we did
+
+We designed a collar that watches the cow all day. It carries a 9-axis motion sensor (an IMU) and a DS18B20 temperature sensor placed on shaved skin on the neck. An STM32F411 microcontroller on the collar classifies the cow's behaviour locally, so the collar does not need to send raw motion data.
+
+The collar sends summaries and oestrus alerts over LoRa radio to a base station on the farm. The base station forwards the data to the cloud over a 4G LTE Cat 1 module (A7670E) using MQTT.
+
+A pilot is planned on cows at the DeKUT School Farm. In the pilot, the collar's behaviour calls will be compared with the records that farm attendants keep by watching the animals (observer ethograms).
+
+## What we found
+
+- The system is still in development and has not been tested on animals.
+- About 90% classification accuracy and 21 days of battery life are design targets, not measurements.
+- No animal outcomes or credit assessments have been measured yet.
+
+## Why it matters
+
+If the pilot confirms the design, farm attendants would see behaviour trends and get an alert when a cow may be in heat or unwell, so they can follow up sooner. Over time the collar would also build a record for each animal. Such a record could support a small farmer's application for credit.
+
+The collar is meant to prompt a person to look. It will not give a confirmed diagnosis.
+
+## Limits
+
+This summary is written from the conference abstract. The work is a design at an early stage: there are no field results, and the accuracy and battery figures are targets. Whether the behaviour classes match what attendants observe will only be known after the pilot. The link between animal records and credit access is a possible use, not a tested one.
+
+## Read the paper
+
+- Conference poster: [doi.org/10.33803/j5pueh](https://doi.org/10.33803/j5pueh), Book of Abstracts of the 10th DeKUT International Conference on Science, Technology, Innovation and Entrepreneurship (STI&E 2026), 2026.
+- Authors: Patty Mailu Mutinda, David M Ngari, Samwel Kamau, Benson Nganga, Jeff Kamau, Leone Njiru, Brian Koech, Samuel Macharia Kang'iri.
